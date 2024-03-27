@@ -26,7 +26,6 @@ function Header() {
   const getCategoryList = () => {
     GlobalApi.getCategory().then(resp => {
       setCategoryList(resp.data.data);
-      console.log(resp.data.data);
     })
   }
 
