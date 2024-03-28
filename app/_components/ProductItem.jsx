@@ -9,7 +9,7 @@ function ProductItem({ product }) {
     >
       <Image 
         className='h-[200px] w-[200px] object-contain'
-        src={`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}${product?.attributes?.images?.data[0]?.attributes?.url}`} 
+        src={product.attributes.image} 
         alt={product.attributes.name} 
         width={500}
         height={200}

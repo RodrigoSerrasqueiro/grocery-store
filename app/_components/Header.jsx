@@ -46,7 +46,7 @@ function Header() {
             {categoryList.map((category, index) => (
               <DropdownMenuItem className='gap-x-4 cursor-pointer' key={index}>
                 <Image 
-                  src={`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}${category?.attributes?.icon?.data[0]?.attributes?.url}`}
+                  src={category.attributes.image}
                   alt='icon'
                   width={30}
                   height={30}

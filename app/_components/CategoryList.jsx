@@ -12,7 +12,7 @@ function CategoryList({ categoryList }) {
           <div key={index} className='flex flex-col items-center bg-green-50 gap-2 p-3 rounded-lg group cursor-pointer hover:bg-green-200'>
             <Image 
               className='group-hover:scale-125 transition-all ease-in-out'
-              src={`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}${category?.attributes?.icon?.data[0]?.attributes?.url}`} 
+              src={category.attributes.image} 
               alt='category icon'
               width={50}
               height={50}

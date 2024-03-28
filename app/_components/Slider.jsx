@@ -17,7 +17,7 @@ function Slider({ sliderList }) {
           <CarouselItem key={index}>
             <Image
               className='w-full h-[200px] md:h-[400px] object-cover rounded-2xl' 
-              src={`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}${slider?.attributes?.image?.data[0]?.attributes?.url}`} 
+              src={slider.attributes.image} 
               alt='banner'
               width={1000}
               height={400}
