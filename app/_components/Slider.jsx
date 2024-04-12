@@ -16,7 +16,7 @@ function Slider({ sliderList }) {
         {sliderList.map((slider, index) => (
           <CarouselItem key={index}>
             <Image
-              className='w-full h-[200px] md:h-[400px] object-cover rounded-2xl' 
+              className='w-full h-[150px] md:h-[400px] rounded-2xl sm:object-cover' 
               src={slider.attributes.image} 
               alt='banner'
               width={1000}

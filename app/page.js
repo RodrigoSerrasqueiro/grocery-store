@@ -11,8 +11,10 @@ export default async function Home() {
   const productList = await GlobalApi.getAllProducts();
 
   return (
-    <main className="p-10 px-16">
-      <Slider sliderList={sliderList} />
+    <main className="px-4 p-10 sm:px-16">
+      <div className="px-8 sm:px-0">
+        <Slider sliderList={sliderList} />
+      </div>
       <CategoryList categoryList={categoryList} />
       <ProductList productList={productList} />
       <Image
