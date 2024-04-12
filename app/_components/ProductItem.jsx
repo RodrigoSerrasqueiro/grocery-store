@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button';
+import { Button } from '../../components/ui/button';
 import Image from 'next/image';
 import React from 'react';
 import {
@@ -7,7 +7,7 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTrigger,
-} from "@/components/ui/dialog"
+} from "../../components/ui/dialog";
 import ProductItemDetail from './ProductItemDetail';
 
 
