@@ -29,6 +29,20 @@ const registerUser = (username, email, password) => axiosClient.post('/auth/loca
 const SignIn = (email, password) => axiosClient.post('/auth/local',
 {identifier: email, password});
 
+const addToCart = (data, jwt) => axiosClient.post('/user-carts', data, {
+  headers: {
+    Authorization: `Bearer ${jwt}`
+  }
+});
+
+const getCartItems = (userId, jwt) => axiosClient.get(`/user-carts?filters[userId] [$eq]=${userId}&populate=*`, {
+  headers: {
+    Authorization: `Bearer ${jwt}`
+  }
+}).then(resp => {
+  return resp.data.data
+})
+
 
 export default {
   getCategory,
@@ -37,5 +51,7 @@ export default {
   getAllProducts,
   getProductsByCategory,
   registerUser,
-  SignIn
+  SignIn,
+  addToCart,
+  getCartItems
 }
