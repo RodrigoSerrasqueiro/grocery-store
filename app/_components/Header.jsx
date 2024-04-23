@@ -12,11 +12,20 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../../components/ui/dropdown-menu";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "../../components/ui/sheet";
 import GlobalApi from '../_utils/GlobalApi';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { UpdateCartContext } from '../_context/UpdateCartContext';
-
+import { CartItemList } from '../_components/CartItemList';
+import { toast } from 'sonner';
 
 function Header() {
 
@@ -26,6 +35,7 @@ function Header() {
   const isLogin = jwt ? true : false;
   const [totalCartItem, setTotalCartItem] = useState(0);
   const { updateCart } = useContext(UpdateCartContext);
+  const [cartItemList, setCartItemList] = useState([]);
   const router = useRouter();
 
   useEffect(() => {
@@ -43,13 +53,24 @@ function Header() {
   }
 
   const getCartItems = async () => {
+    if (!user) {
+      return
+    }
     const cartItemList = await GlobalApi.getCartItems(user.id, jwt);
     setTotalCartItem(cartItemList?.length);
+    setCartItemList(cartItemList);
   }
 
   const onSignOut = () => {
     sessionStorage.clear();
     router.push('/sign-in');
+  }
+
+  const onDeleteCartItem = (id) => {
+    GlobalApi.deleteCartItem(id, jwt).then(resp => {
+      toast('Item removed!');
+      getCartItems();
+    })
   }
 
   return (
@@ -69,7 +90,7 @@ function Header() {
             <DropdownMenuLabel>Browse Category</DropdownMenuLabel>
             <DropdownMenuSeparator />
             {categoryList.map((category, index) => (
-              <Link href={`/products-category/${category.attributes.name}`}>
+              <Link href={`/products-category/${category.attributes.name}`} key={index}>
                 <DropdownMenuItem className='gap-x-4 cursor-pointer' key={index}>
                   <Image 
                     src={category.attributes.image}
@@ -94,10 +115,24 @@ function Header() {
         </div>
       </div>
       <div className='flex gap-5 items-center'>
-        <h2 className='flex gap-2 items-center text-lg'>
-          <ShoppingBasket className='w-7 h-7' />
-          <span className='bg-primary text-white px-2 w-7 h-7 rounded-full'>{totalCartItem}</span>
-        </h2>
+
+        <Sheet>
+          <SheetTrigger>
+          <h2 className='flex gap-2 items-center text-lg'>
+            <ShoppingBasket className='w-7 h-7 cursor-pointer' />
+            <span className='bg-primary text-white px-2 w-7 h-7 rounded-full'>{totalCartItem}</span>
+          </h2>
+          </SheetTrigger>
+          <SheetContent>
+            <SheetHeader>
+              <SheetTitle className='bg-primary text-white font-bold text-lg p-2'>My Cart</SheetTitle>
+              <SheetDescription>
+                <CartItemList cartItemList={cartItemList} onDeleteCartItem={onDeleteCartItem} />
+              </SheetDescription>
+            </SheetHeader>
+          </SheetContent>
+        </Sheet>
+
         {!isLogin ?
           <Link href={'/sign-in'}>
             <Button>Login</Button>

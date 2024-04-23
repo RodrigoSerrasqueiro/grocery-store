@@ -4,11 +4,12 @@ import Link from "next/link";
 import { Button } from "../../../components/ui/button";
 import { Input } from "../../../components/ui/input";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import GlobalApi from "../../_utils/GlobalApi";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { LoaderIcon } from "lucide-react";
+import { UpdateCartContext } from '../../_context/UpdateCartContext';
 
 function SignIn() {
 
@@ -16,6 +17,7 @@ function SignIn() {
   const [password, setPassword] = useState('');
   const router = useRouter();
   const [loader, setLoader] = useState(false);
+  const { updateCart, setUpdateCart } = useContext(UpdateCartContext);
 
   useEffect(() => {
     const jwt = sessionStorage.getItem('jwt');
@@ -31,6 +33,7 @@ function SignIn() {
       sessionStorage.setItem('user', JSON.stringify(resp.data.user));
       sessionStorage.setItem('jwt', resp.data.jwt);
       toast('Login successfully');
+      setUpdateCart(!updateCart)
       router.push('/');
       setLoader(false);
     }, (e) => {
