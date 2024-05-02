@@ -61,7 +61,7 @@ function Header() {
     GlobalApi.getCategory().then(resp => {
       setCategoryList(resp.data.data);
     })
-  }
+  };
 
   const getCartItems = async () => {
     if (!user) {
@@ -70,19 +70,19 @@ function Header() {
     const cartItemList = await GlobalApi.getCartItems(user.id, jwt);
     setTotalCartItem(cartItemList?.length);
     setCartItemList(cartItemList);
-  }
+  };
 
   const onSignOut = () => {
     sessionStorage.clear();
     router.push('/sign-in');
-  }
+  };
 
   const onDeleteCartItem = (id) => {
     GlobalApi.deleteCartItem(id, jwt).then(resp => {
       toast('Item removed!');
       getCartItems();
     })
-  }
+  };
 
   return (
     <header className='p-5 shadow-md flex justify-between'>

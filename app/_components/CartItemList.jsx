@@ -1,7 +1,5 @@
 import { TrashIcon } from "lucide-react";
 import Image from "next/image";
-import { Button } from "../../components/ui/button";
-import { useEffect, useState } from "react";
 
 export function CartItemList({ cartItemList, onDeleteCartItem }) {
 
