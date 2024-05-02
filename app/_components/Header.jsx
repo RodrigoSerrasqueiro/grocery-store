@@ -14,6 +14,7 @@ import {
 } from "../../components/ui/dropdown-menu";
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetDescription,
   SheetHeader,
@@ -36,7 +37,17 @@ function Header() {
   const [totalCartItem, setTotalCartItem] = useState(0);
   const { updateCart } = useContext(UpdateCartContext);
   const [cartItemList, setCartItemList] = useState([]);
+  const [subtotal, setSubtotal] = useState(0);
   const router = useRouter();
+
+
+  useEffect(() => {
+    let total = 0
+    cartItemList.forEach(element => {
+      total = total + element.amount
+    })
+    setSubtotal(total.toFixed(2));
+  },[cartItemList]);
 
   useEffect(() => {
     getCategoryList();
@@ -130,6 +141,15 @@ function Header() {
                 <CartItemList cartItemList={cartItemList} onDeleteCartItem={onDeleteCartItem} />
               </SheetDescription>
             </SheetHeader>
+            <SheetClose asChild>
+              <div className="absolute w-[90%] bottom-6 flex flex-col bg-white">
+                <h2 className="text-lg font-bold flex justify-between">
+                  Subtotal
+                  <span>${subtotal}</span>
+                </h2>
+                <Button onClick={() => router.push(jwt ? '/checkout' : '/sign-in')}>Checkout</Button>
+              </div>
+            </SheetClose>
           </SheetContent>
         </Sheet>
 

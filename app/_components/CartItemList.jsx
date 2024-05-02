@@ -5,16 +5,6 @@ import { useEffect, useState } from "react";
 
 export function CartItemList({ cartItemList, onDeleteCartItem }) {
 
-  const [subtotal, setSubtotal] = useState(0);
-
-  useEffect(() => {
-    let total = 0
-    cartItemList.forEach(element => {
-      total = total + element.amount
-    })
-    setSubtotal(total.toFixed(2));
-  },[cartItemList]);
-
   return (
     <div className="h-[72vh] overflow-auto">
       <div>
@@ -41,13 +31,6 @@ export function CartItemList({ cartItemList, onDeleteCartItem }) {
             />
           </div>
         ))}
-      </div>
-      <div className="absolute w-[90%] bottom-6 flex flex-col bg-white">
-        <h2 className="text-lg font-bold flex justify-between">
-          Subtotal
-          <span>${subtotal}</span>
-        </h2>
-        <Button>View Cart</Button>
       </div>
     </div>
   )
