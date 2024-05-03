@@ -8,6 +8,7 @@ import { usePathname } from "next/navigation";
 import { UpdateCartContext } from "../app/_context/UpdateCartContext";
 import { useState } from "react";
 const outfit = Outfit({ subsets: ["latin"] });
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 
 // export const metadata = {
 //   title: "Create Next App",
@@ -21,14 +22,18 @@ export default function RootLayout({ children }) {
     params === "/sign-in" || params === "/create-account" ? false : true;
 
   return (
-    <html lang="en">
-      <body className={outfit.className}>
-        <UpdateCartContext.Provider value={{ updateCart, setUpdateCart }}>
-          {showHeader && <Header />}
-          {children}
-          <Toaster />
-        </UpdateCartContext.Provider>
-      </body>
-    </html>
+    <PayPalScriptProvider
+      options={{ clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID }}
+    >
+      <html lang="en">
+        <body className={outfit.className}>
+          <UpdateCartContext.Provider value={{ updateCart, setUpdateCart }}>
+            {showHeader && <Header />}
+            {children}
+            <Toaster />
+          </UpdateCartContext.Provider>
+        </body>
+      </html>
+    </PayPalScriptProvider>
   );
 }

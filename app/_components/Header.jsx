@@ -35,11 +35,10 @@ function Header() {
   const [categoryList, setCategoryList] = useState([]);
   const isLogin = jwt ? true : false;
   const [totalCartItem, setTotalCartItem] = useState(0);
-  const { updateCart } = useContext(UpdateCartContext);
+  const { updateCart, setUpdateCart } = useContext(UpdateCartContext);
   const [cartItemList, setCartItemList] = useState([]);
   const [subtotal, setSubtotal] = useState(0);
   const router = useRouter();
-
 
   useEffect(() => {
     let total = 0
@@ -81,6 +80,7 @@ function Header() {
     GlobalApi.deleteCartItem(id, jwt).then(resp => {
       toast('Item removed!');
       getCartItems();
+      setUpdateCart(!updateCart);
     })
   };
 
@@ -147,7 +147,12 @@ function Header() {
                   Subtotal
                   <span>${subtotal}</span>
                 </h2>
-                <Button onClick={() => router.push(jwt ? '/checkout' : '/sign-in')}>Checkout</Button>
+                <Button 
+                  onClick={() => router.push(jwt ? '/checkout' : '/sign-in')}
+                  disabled={totalCartItem === 0}
+                >
+                  Checkout
+                </Button>
               </div>
             </SheetClose>
           </SheetContent>
