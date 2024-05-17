@@ -1,13 +1,12 @@
 'use client';
 
-import { ArrowBigRight } from "lucide-react";
-import { Button } from "../../../components/ui/button";
 import { Input } from "../../../components/ui/input";
 import GlobalApi from "../../_utils/GlobalApi";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { PayPalButtons } from "@paypal/react-paypal-js";
 import { toast } from "sonner";
+import { UpdateCartContext } from "../../_context/UpdateCartContext";
 
 function Checkout() {
 
@@ -18,14 +17,15 @@ function Checkout() {
   const [subtotal, setSubtotal] = useState(0);
   const [dataLoaded, setDataLoaded] = useState(false);
   const [totalAmount, setTotalAmount] = useState(null);
-  const [userName, SetUserName] = useState('');
-  const [email, setEmail] = useState('');
+  const [userName, SetUserName] = useState(user.username);
+  const [email, setEmail] = useState(user.email);
   const [phone, setPhone] = useState('');
   const [zip, setZip] = useState('');
   const [address, setAddress] = useState('');
   const router = useRouter();
   const tax = 9;
   const delivery = 15;
+  const { updateCart, setUpdateCart } = useContext(UpdateCartContext);
 
   useEffect(() => {
     if (!jwt) {
@@ -92,9 +92,9 @@ function Checkout() {
 
     GlobalApi.createOrder(payload, jwt).then(resp => {
       toast('Order Places Succesfully! Thank You!');
-      cartItemList.forEach((item, index) => {
-        GlobalApi.deleteCartItem(item.id, jwt).then(resp => {
-  
+      cartItemList.forEach((item) => {
+        GlobalApi.deleteCartItem(item.id, jwt).then(() => {
+          setUpdateCart(!updateCart);
         })
       })
       router.replace('/order-confirmation');
@@ -115,8 +115,16 @@ function Checkout() {
             <div className="md:col-span-2 mx-8 md:mx-20">
               <h2 className="font-bold text-3xl">Billing Details</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-10 mt-3">
-                <Input placeholder="Name" onChange={(e) => SetUserName(e.target.value)} />
-                <Input placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
+                <Input 
+                  placeholder="Name" 
+                  onChange={(e) => SetUserName(e.target.value)}
+                  defaultValue={user.username}
+                />
+                <Input 
+                  placeholder="Email" 
+                  onChange={(e) => setEmail(e.target.value)}
+                  defaultValue={user.email}
+                />
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-10 mt-3">
                 <Input placeholder="Phone" onChange={(e) => setPhone(e.target.value)} />
