@@ -92,6 +92,12 @@ function Checkout() {
 
     GlobalApi.createOrder(payload, jwt).then(resp => {
       toast('Order Places Succesfully! Thank You!');
+      cartItemList.forEach((item, index) => {
+        GlobalApi.deleteCartItem(item.id, jwt).then(resp => {
+  
+        })
+      })
+      router.replace('/order-confirmation');
     });
 
   }
@@ -129,8 +135,11 @@ function Checkout() {
                 <h2 className="flex justify-between">Tax (9%) : <span>${((subtotal / 100) * tax).toFixed(2)}</span></h2>
                 <hr></hr>
                 <h2 className="font-bold flex justify-between">Total : <span>${calculateTotalAmount()}</span></h2>
+                
                 {/* <Button onClick={() => onApprove({paymentId: "123"})}>Payment <ArrowBigRight /></Button> */}
-                <PayPalButtons style={{ layout: "horizontal" }}
+                <PayPalButtons 
+                  style={{ layout: "horizontal" }}
+                  disabled={!(userName && email && address && zip)}
                   onApprove={onApprove}
                   onError={onError}
                   createOrder={(data, actions) => {
