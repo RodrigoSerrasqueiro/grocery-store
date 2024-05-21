@@ -30,7 +30,8 @@ import { toast } from 'sonner';
 
 function Header() {
 
-  const user = JSON.parse(sessionStorage.getItem('user'));
+  const userData = sessionStorage.getItem('user') || {};
+  const user = JSON.parse(userData);
   const jwt = sessionStorage.getItem('jwt');
   const [categoryList, setCategoryList] = useState([]);
   const isLogin = jwt ? true : false;
