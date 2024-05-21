@@ -11,9 +11,8 @@ import { UpdateCartContext } from "../_context/UpdateCartContext";
 
 function ProductItemDetail({ product }) {
 
-  const userData = localStorage.getItem('user') || {};
-  const user = JSON.parse(userData);
-  const jwt = localStorage.getItem('jwt');
+  const user = typeof window !== "undefined" ? JSON.parse(localStorage.getItem('user')) : {};
+  const jwt = typeof window !== "undefined" ? localStorage.getItem('jwt') : "";
   const { updateCart, setUpdateCart } = useContext(UpdateCartContext);
   const [productTotalPrice, setProductTotalPrice] = useState(
     product.attributes.sellingPrice?

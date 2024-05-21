@@ -30,9 +30,8 @@ import { toast } from 'sonner';
 
 function Header() {
 
-  const userData = localStorage.getItem('user') || {};
-  const user = JSON.parse(userData);
-  const jwt = localStorage.getItem('jwt');
+  const user = typeof window !== "undefined" ? JSON.parse(localStorage.getItem('user')) : {};
+  const jwt = typeof window !== "undefined" ? localStorage.getItem('jwt') : "";
   const [categoryList, setCategoryList] = useState([]);
   const isLogin = jwt ? true : false;
   const [totalCartItem, setTotalCartItem] = useState(0);

@@ -13,10 +13,9 @@ import OrderItemComponent from './_components/MyOrderItem';
 
 function MyOrder() {
 
-  const jwt = localStorage.getItem('jwt');
+  const user = typeof window !== "undefined" ? JSON.parse(localStorage.getItem('user')) : {};
+  const jwt = typeof window !== "undefined" ? localStorage.getItem('jwt') : "";
   const router = useRouter();
-  const userData = localStorage.getItem('user') || {};
-  const user = JSON.parse(userData);
   const [orderList, setOrderList] = useState([]);
 
   useEffect(() => {

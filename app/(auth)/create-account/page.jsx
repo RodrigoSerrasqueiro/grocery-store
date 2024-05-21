@@ -19,7 +19,7 @@ function CreateAccount() {
   const [loader, setLoader] = useState(false);
 
   useEffect(() => {
-    const jwt = localStorage.getItem('jwt');
+    const jwt = typeof window !== "undefined" ? localStorage.getItem('jwt') : "";
     if (jwt) {
       router.push('/');
     }

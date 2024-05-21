@@ -20,7 +20,7 @@ function SignIn() {
   const { updateCart, setUpdateCart } = useContext(UpdateCartContext);
 
   useEffect(() => {
-    const jwt = localStorage.getItem('jwt');
+    const jwt = typeof window !== "undefined" ? localStorage.getItem('jwt') : "";
     if (jwt) {
       router.push('/');
     }
