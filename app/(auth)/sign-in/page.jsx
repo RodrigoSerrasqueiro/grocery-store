@@ -20,7 +20,7 @@ function SignIn() {
   const { updateCart, setUpdateCart } = useContext(UpdateCartContext);
 
   useEffect(() => {
-    const jwt = sessionStorage.getItem('jwt');
+    const jwt = localStorage.getItem('jwt');
     if (jwt) {
       router.push('/');
     }
@@ -30,8 +30,8 @@ function SignIn() {
     setLoader(true);
     GlobalApi.SignIn(email, password)
     .then(resp => {
-      sessionStorage.setItem('user', JSON.stringify(resp.data.user));
-      sessionStorage.setItem('jwt', resp.data.jwt);
+      localStorage.setItem('user', JSON.stringify(resp.data.user));
+      localStorage.setItem('jwt', resp.data.jwt);
       toast('Login successfully');
       setUpdateCart(!updateCart)
       router.push('/');

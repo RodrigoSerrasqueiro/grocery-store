@@ -30,9 +30,9 @@ import { toast } from 'sonner';
 
 function Header() {
 
-  const userData = sessionStorage.getItem('user') || {};
+  const userData = localStorage.getItem('user') || {};
   const user = JSON.parse(userData);
-  const jwt = sessionStorage.getItem('jwt');
+  const jwt = localStorage.getItem('jwt');
   const [categoryList, setCategoryList] = useState([]);
   const isLogin = jwt ? true : false;
   const [totalCartItem, setTotalCartItem] = useState(0);
@@ -73,7 +73,7 @@ function Header() {
   };
 
   const onSignOut = () => {
-    sessionStorage.clear();
+    localStorage.clear();
     router.push('/sign-in');
   };
 

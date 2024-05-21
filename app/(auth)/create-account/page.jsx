@@ -19,7 +19,7 @@ function CreateAccount() {
   const [loader, setLoader] = useState(false);
 
   useEffect(() => {
-    const jwt = sessionStorage.getItem('jwt');
+    const jwt = localStorage.getItem('jwt');
     if (jwt) {
       router.push('/');
     }
@@ -29,8 +29,8 @@ function CreateAccount() {
     setLoader(true)
     GlobalApi.registerUser(userName, email, password)
     .then(resp => {
-      sessionStorage.setItem('user', JSON.stringify(resp.data.user));
-      sessionStorage.setItem('jwt', resp.data.jwt);
+      localStorage.setItem('user', JSON.stringify(resp.data.user));
+      localStorage.setItem('jwt', resp.data.jwt);
       toast('Account created successfully');
       router.push('/');
       setLoader(false);

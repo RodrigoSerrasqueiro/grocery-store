@@ -10,9 +10,9 @@ import { UpdateCartContext } from "../../_context/UpdateCartContext";
 
 function Checkout() {
 
-  const userData = sessionStorage.getItem('user') || {};
+  const userData = localStorage.getItem('user') || {};
   const user = JSON.parse(userData);
-  const jwt = sessionStorage.getItem('jwt');
+  const jwt = localStorage.getItem('jwt');
   const [totalCartItem, setTotalCartItem] = useState(0);
   const [cartItemList, setCartItemList] = useState([]);
   const [subtotal, setSubtotal] = useState(0);

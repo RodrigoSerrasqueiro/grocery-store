@@ -13,9 +13,9 @@ import OrderItemComponent from './_components/MyOrderItem';
 
 function MyOrder() {
 
-  const jwt = sessionStorage.getItem('jwt');
+  const jwt = localStorage.getItem('jwt');
   const router = useRouter();
-  const userData = sessionStorage.getItem('user') || {};
+  const userData = localStorage.getItem('user') || {};
   const user = JSON.parse(userData);
   const [orderList, setOrderList] = useState([]);
 
