@@ -15,7 +15,8 @@ function MyOrder() {
 
   const jwt = sessionStorage.getItem('jwt');
   const router = useRouter();
-  const user = JSON.parse(sessionStorage.getItem('user'));
+  const userData = sessionStorage.getItem('user') || {};
+  const user = JSON.parse(userData);
   const [orderList, setOrderList] = useState([]);
 
   useEffect(() => {
