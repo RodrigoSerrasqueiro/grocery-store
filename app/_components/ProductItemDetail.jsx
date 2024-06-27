@@ -30,6 +30,7 @@ function ProductItemDetail({ product }) {
       setLoading(false);
       return;
     }
+    
     const data = {
       data: {
         quantity,
