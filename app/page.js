@@ -18,11 +18,11 @@ export default async function Home() {
       <CategoryList categoryList={categoryList} />
       <ProductList productList={productList} />
       <Image
-        src="https://aprende-ja.s3.sa-east-1.amazonaws.com/images/banner.png"
+        src="https://media.licdn.com/dms/image/C5612AQEXgCuoPie5vw/article-cover_image-shrink_720_1280/0/1641311247080?e=2147483647&v=beta&t=1rn2_Yguc5Dp722bY7z68HXGcI9ClKNzDbIvgK8WSQ8"
         alt="banner"
         width={1000}
         height={300}
-        className="w-full h-[400p] object-contain"
+        className="w-full h-[400px] mt-5"
       />
       <Footer />
     </main>

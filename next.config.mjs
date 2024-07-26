@@ -10,7 +10,7 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "aprende-ja.s3.sa-east-1.amazonaws.com",
+        hostname: "media.licdn.com",
         // port: "1337",
         pathname: "/**",
       },
