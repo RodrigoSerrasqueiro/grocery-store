@@ -14,6 +14,36 @@ const nextConfig = {
         // port: "1337",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "pngfre.com",
+        // port: "1337",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "static.vecteezy.com",
+        // port: "1337",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "gallery.yopriceville.com",
+        // port: "1337",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "png.pngtree.com",
+        // port: "1337",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "wallpapers.com",
+        // port: "1337",
+        pathname: "/**",
+      },
     ],
   },
 };

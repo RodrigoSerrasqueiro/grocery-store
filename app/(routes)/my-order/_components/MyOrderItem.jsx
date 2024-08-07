@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 function OrderItemComponent({ orderItem }) {
+  console.log(orderItem)
   return (
     <div className="w-full md:w-[60%]">
       <div className="grid grid-cols-2 md:grid-cols-5 mt-3 items-center">
