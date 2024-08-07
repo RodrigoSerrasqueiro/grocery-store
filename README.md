@@ -43,7 +43,12 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 Uma mercearia online muito bonita e interativa. É possível criar uma conta, realizar login, filtrar produtos por categoria, adicionar e remover produtos do carrinho, simular o pagamento e visualizar o pedido. Um fluxo completo de e-commerce que põe em prática conceitos de componentização, server actions, responsividade e clean code. A grande sacada deste projeto foi utilizar o CMS Strapi para construir a API. Em poucos minutos toda a estrutura já estava montada e só bastou ir adicionando os conteúdos.
 
-- [Acesse o projeto finalizado, online](https://grocery-store-2bmnrmk0e-rodrigoserrasqueiros-projects.vercel.app)
+Para simular uma compra, utilize os seguintes dados de teste para fazer login no PayPal:
+
+email: sb-ajr2d30682187@personal.example.com
+senha: 0P>1gD:L
+
+- [Acesse o projeto finalizado, online](https://grocery-store-jade.vercel.app)
 
 - [Repositório API](https://github.com/RodrigoSerrasqueiro/grocery-store-api)
 
